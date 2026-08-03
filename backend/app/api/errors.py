@@ -4,11 +4,14 @@ from fastapi import Request
 from fastapi.responses import JSONResponse
 
 from app.core.exceptions import (
+    AnalysisProviderError,
+    AnalysisValidationError,
     AnnouncementNotFoundError,
     AttachmentUnavailableError,
     CompanyNotFoundError,
     FileTooLargeError,
     InvalidDocumentError,
+    MarketDataUnavailableError,
     MarketLensError,
     ProviderRateLimitError,
     ProviderUnavailableError,
@@ -17,6 +20,8 @@ from app.core.exceptions import (
 )
 
 STATUS_BY_ERROR = {
+    AnalysisProviderError: 502,
+    AnalysisValidationError: 502,
     CompanyNotFoundError: 404,
     AnnouncementNotFoundError: 404,
     AttachmentUnavailableError: 404,
@@ -26,6 +31,7 @@ STATUS_BY_ERROR = {
     FileTooLargeError: 413,
     ScannedPdfUnsupportedError: 422,
     InvalidDocumentError: 422,
+    MarketDataUnavailableError: 503,
 }
 
 

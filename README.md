@@ -2,7 +2,11 @@
 
 MarketLens AI is a focused educational application for explaining official Indian stock-market corporate announcements. The MVP will use a React frontend, a FastAPI backend, deterministic data services, and one bounded analysis agent.
 
-The project currently implements through **Phase 5**: normalized provider contracts, local company resolution, bounded official BSE announcement retrieval, secure PDF download/upload and extraction, and deterministic nearby price-reaction calculation. OpenAI analysis and persistence are intentionally not present yet.
+The project currently implements through **Phase 7**: normalized provider contracts,
+local company resolution, bounded official BSE announcement retrieval, secure PDF
+download/upload and extraction, deterministic nearby price-reaction calculation,
+and one structured announcement-analysis agent exposed through complete automatic
+and manual-upload API workflows. Persistence is intentionally not present yet.
 
 ## Prerequisites
 
@@ -21,6 +25,7 @@ python -m venv .venv
 python -m pip install --upgrade pip
 python -m pip install -e ".[dev]"
 Copy-Item .env.example .env
+# Set OPENAI_API_KEY in .env before requesting an analysis.
 uvicorn app.main:app --reload
 ```
 
@@ -73,6 +78,8 @@ Available endpoints:
 - `GET /api/companies/{company_id}/announcements`
 - `POST /api/companies/{company_id}/announcements/{announcement_id}/extract`
 - `POST /api/documents/extract-upload`
+- `POST /api/analyses/from-announcement`
+- `POST /api/analyses/from-upload`
 
 The health endpoint returns:
 
@@ -89,7 +96,13 @@ Every backend response includes an `X-Request-ID` header. Browser access is rest
 
 MarketLens AI explains public information; it does not provide investment advice, price forecasts, or trade recommendations. Remote attachment URLs are resolved server-side from selected announcements, validated against SSRF-sensitive destinations and redirects, streamed with size limits, checked for PDF content and signature, and deleted after extraction. Scanned PDFs return an explicit unsupported status because OCR is outside the MVP.
 
-The internal price-reaction tool uses a bounded event window and application arithmetic. It returns unavailable instead of guessing when a ticker or adjacent trading session cannot be verified. A price reaction is not presented as proof that an announcement caused a market move.
+The single analysis agent receives only normalized metadata and bounded, extracted
+document text. It can call only the internal price-reaction tool, whose arguments
+and output are validated. The tool uses a bounded event window and application
+arithmetic, and returns unavailable instead of guessing when a ticker or adjacent
+trading session cannot be verified. A price reaction is not presented as proof
+that an announcement caused a market move. Automated tests use a mocked OpenAI
+client and never require an API key.
 
 ## BSE provider deployment note
 

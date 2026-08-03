@@ -54,3 +54,11 @@ class ScannedPdfUnsupportedError(InvalidDocumentError):
 
 class MarketDataUnavailableError(MarketLensError):
     code = "market_data_unavailable"
+
+
+class AnalysisProviderError(MarketLensError):
+    code = "analysis_provider_error"
+
+
+class AnalysisValidationError(MarketLensError):
+    code = "analysis_validation_error"

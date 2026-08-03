@@ -47,3 +47,17 @@ class AnnouncementService:
         if not announcement.attachment_url:
             raise AttachmentUnavailableError("Selected announcement has no PDF attachment")
         return await document_service.extract_remote(announcement.attachment_url)
+
+    async def resolve_announcement(
+        self,
+        company_id: str,
+        announcement_id: str,
+    ) -> AnnouncementSummary:
+        announcements = await self.list_recent(company_id, None, None, 20)
+        announcement = next(
+            (item for item in announcements if item.announcement_id == announcement_id),
+            None,
+        )
+        if announcement is None:
+            raise AnnouncementNotFoundError("Selected announcement was not found")
+        return announcement

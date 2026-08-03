@@ -5,6 +5,7 @@ from fastapi import FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.errors import marketlens_error_handler
+from app.api.routes.analyses import router as analyses_router
 from app.api.routes.companies import router as companies_router
 from app.api.routes.documents import router as documents_router
 from app.api.routes.health import router as health_router
@@ -43,5 +44,6 @@ async def add_request_id(
 
 
 app.include_router(health_router, prefix="/api")
+app.include_router(analyses_router, prefix="/api")
 app.include_router(companies_router, prefix="/api")
 app.include_router(documents_router, prefix="/api")

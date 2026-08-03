@@ -1,7 +1,7 @@
 from functools import lru_cache
 from typing import Literal
 
-from pydantic import Field, HttpUrl, PositiveInt
+from pydantic import AliasChoices, Field, HttpUrl, PositiveInt, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -33,6 +33,17 @@ class Settings(BaseSettings):
     max_redirects: int = Field(default=3, ge=0, le=5)
     market_data_timeout_seconds: float = Field(default=15.0, gt=0, le=60)
     market_event_window_days: int = Field(default=7, ge=3, le=15)
+    openai_api_key: SecretStr | None = Field(
+        default=None,
+        validation_alias=AliasChoices("OPENAI_API_KEY", "MARKETLENS_OPENAI_API_KEY"),
+    )
+    openai_model: str = Field(
+        default="gpt-5.6-sol",
+        validation_alias=AliasChoices("OPENAI_MODEL", "MARKETLENS_OPENAI_MODEL"),
+    )
+    analysis_timeout_seconds: float = Field(default=60.0, gt=0, le=180)
+    analysis_max_tool_calls: int = Field(default=1, ge=0, le=3)
+    analysis_max_document_chars: PositiveInt = Field(default=60_000, le=200_000)
 
 
 @lru_cache
