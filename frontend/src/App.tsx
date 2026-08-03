@@ -42,6 +42,7 @@ function App() {
 
   return (
     <main className="app-shell">
+      <a className="skip-link" href="#company-query">Skip to company search</a>
       <header className="intro" aria-labelledby="page-title">
         <p className="eyebrow">Indian market announcements, made clearer</p>
         <h1 id="page-title">MarketLens AI</h1>

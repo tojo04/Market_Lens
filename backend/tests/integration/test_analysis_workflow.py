@@ -323,6 +323,21 @@ def test_market_data_unavailable_is_successful_analysis() -> None:
     assert response.json()["price_reaction"]["status"] == "unavailable"
 
 
+def test_client_supplied_attachment_url_is_rejected() -> None:
+    response = request_with_service(
+        make_service(),
+        "/api/analyses/from-announcement",
+        json={
+            "provider": "bse",
+            "company_id": "500209",
+            "announcement_id": "news-1",
+            "attachment_url": "http://127.0.0.1/private.pdf",
+        },
+    )
+
+    assert response.status_code == 422
+
+
 @pytest.mark.anyio
 async def test_full_automatic_workflow_cleans_downloaded_pdf(tmp_path: Path) -> None:
     settings = Settings(environment="test")
