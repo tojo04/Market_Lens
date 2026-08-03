@@ -148,17 +148,27 @@ class StubAgent:
         return analysis_for(analysis_input)
 
 
+class StubAnalysisRepository:
+    def __init__(self) -> None:
+        self.saved: list[AnnouncementAnalysis] = []
+
+    def save(self, analysis: AnnouncementAnalysis) -> None:
+        self.saved.append(analysis)
+
+
 def make_service(
     *,
     announcement_service: Any | None = None,
     document_service: Any | None = None,
     agent: Any | None = None,
+    analysis_repository: Any | None = None,
 ) -> AnalysisService:
     return AnalysisService(
         StubCompanyService(),  # type: ignore[arg-type]
         announcement_service or StubAnnouncementService(),  # type: ignore[arg-type]
         document_service or StubDocumentService(),  # type: ignore[arg-type]
         agent or StubAgent(),  # type: ignore[arg-type]
+        analysis_repository or StubAnalysisRepository(),  # type: ignore[arg-type]
     )
 
 
@@ -177,8 +187,13 @@ def request_with_service(
 def test_full_automatic_analysis_success() -> None:
     documents = StubDocumentService()
     agent = StubAgent()
+    repository = StubAnalysisRepository()
     response = request_with_service(
-        make_service(document_service=documents, agent=agent),
+        make_service(
+            document_service=documents,
+            agent=agent,
+            analysis_repository=repository,
+        ),
         "/api/analyses/from-announcement",
         json={"provider": "bse", "company_id": "500209", "announcement_id": "news-1"},
     )
@@ -188,12 +203,14 @@ def test_full_automatic_analysis_success() -> None:
     assert response.json()["important_facts"][0]["value"] == "₹1,250 crore"
     assert documents.remote_urls == ["https://www.bseindia.com/filing.pdf"]
     assert agent.inputs[0].pages[0].page_number == 1
+    assert len(repository.saved) == 1
 
 
 def test_manual_upload_analysis_success() -> None:
     documents = StubDocumentService()
+    repository = StubAnalysisRepository()
     response = request_with_service(
-        make_service(document_service=documents),
+        make_service(document_service=documents, analysis_repository=repository),
         "/api/analyses/from-upload",
         files={"file": ("filing.pdf", b"%PDF-fixture", "application/pdf")},
         data={
@@ -209,6 +226,7 @@ def test_manual_upload_analysis_success() -> None:
     assert response.json()["source"]["provider"] == "manual_upload"
     assert response.json()["source"]["company_name"] == "Infosys Limited"
     assert documents.upload_names == ["filing.pdf"]
+    assert len(repository.saved) == 1
 
 
 @pytest.mark.parametrize(

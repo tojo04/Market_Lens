@@ -5,10 +5,12 @@ from openai import AsyncOpenAI
 from app.agents.announcement_agent import AnnouncementAgent, OpenAIClient
 from app.core.config import get_settings
 from app.core.exceptions import AnalysisProviderError
+from app.db.session import get_session_factory
 from app.providers.announcements.base import AnnouncementProvider
 from app.providers.announcements.bse import BSEAnnouncementProvider
 from app.providers.market_data.base import MarketDataProvider
 from app.providers.market_data.yfinance import YFinanceMarketDataProvider
+from app.repositories.analysis_repository import AnalysisRepository
 from app.repositories.company_repository import CompanyRepository
 from app.services.analysis_service import AnalysisService
 from app.services.announcement_service import AnnouncementService
@@ -55,6 +57,11 @@ def get_price_service() -> PriceService:
 
 
 @lru_cache
+def get_analysis_repository() -> AnalysisRepository:
+    return AnalysisRepository(get_session_factory())
+
+
+@lru_cache
 def get_openai_client() -> OpenAIClient:
     settings = get_settings()
     if settings.openai_api_key is None or not settings.openai_api_key.get_secret_value().strip():
@@ -78,4 +85,5 @@ def get_analysis_service() -> AnalysisService:
         get_announcement_service(),
         get_document_service(),
         get_announcement_agent(),
+        get_analysis_repository(),
     )

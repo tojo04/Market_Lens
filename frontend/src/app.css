@@ -70,6 +70,14 @@ a:focus-visible {
   box-shadow: 0 1.2rem 3.5rem rgb(31 45 72 / 7%);
 }
 
+.result-anchor {
+  scroll-margin-top: 1rem;
+}
+
+.result-anchor:focus {
+  outline: none;
+}
+
 .intro {
   position: relative;
   overflow: hidden;
@@ -702,6 +710,98 @@ input[type="file"]::file-selector-button {
   font-size: 0.82rem;
   font-weight: 650;
   text-align: center;
+}
+
+.history-panel {
+  overflow: hidden;
+}
+
+.history-count {
+  flex: 0 0 auto;
+  padding: 0.4rem 0.65rem;
+  border: 1px solid #d8deea;
+  border-radius: 99rem;
+  color: #53627e;
+  background: var(--surface-soft);
+  font-size: 0.76rem;
+  font-weight: 750;
+}
+
+.history-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  gap: 0.7rem;
+  margin: 1.2rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.history-item {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  align-content: start;
+  gap: 0.32rem;
+  padding: 1rem;
+  border: 1px solid #d9dfe9;
+  border-radius: 0.75rem;
+  color: var(--ink);
+  background: #fafbfc;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 150ms ease, background 150ms ease, transform 150ms ease;
+}
+
+.history-item:hover:not(:disabled) {
+  border-color: #95a3b8;
+  background: #f4f6fa;
+  transform: translateY(-1px);
+}
+
+.history-item:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.history-company {
+  color: var(--accent);
+  font-size: 0.73rem;
+  font-weight: 800;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+}
+
+.history-item strong {
+  line-height: 1.35;
+}
+
+.history-meta,
+.history-created {
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.history-created {
+  margin-top: 0.35rem;
+  color: #52627c;
+  font-weight: 700;
+}
+
+.history-empty {
+  display: grid;
+  gap: 0.3rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px dashed #c7cfdb;
+  border-radius: 0.75rem;
+  color: var(--ink-soft);
+  background: var(--surface-soft);
+}
+
+.history-empty span {
+  color: var(--muted);
+  font-size: 0.86rem;
 }
 
 .disclaimer {

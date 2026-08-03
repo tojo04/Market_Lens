@@ -1,7 +1,8 @@
 import "./app.css";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { AnalysisActions } from "./components/AnalysisActions";
+import { AnalysisHistory } from "./components/AnalysisHistory";
 import { AnalysisResult } from "./components/AnalysisResult";
 import { AnnouncementList } from "./components/AnnouncementList";
 import { CompanySearch } from "./components/CompanySearch";
@@ -16,6 +17,17 @@ function App() {
   } | null>(null);
   const contextKey = `${selectedCompany?.company_id ?? "none"}:${selectedAnnouncement?.announcement_id ?? "none"}`;
   const analysis = completedAnalysis?.contextKey === contextKey ? completedAnalysis.result : null;
+  const resultAnchor = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!analysis || !resultAnchor.current) return;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    resultAnchor.current.scrollIntoView({
+      behavior: reduceMotion ? "auto" : "smooth",
+      block: "start",
+    });
+    resultAnchor.current.focus({ preventScroll: true });
+  }, [analysis]);
 
   const selectCompany = (company: CompanyMatch) => {
     setSelectedCompany(company);
@@ -69,7 +81,15 @@ function App() {
         onComplete={(result) => setCompletedAnalysis({ contextKey, result })}
       />
 
-      {analysis && <AnalysisResult analysis={analysis} />}
+      {analysis && (
+        <div className="result-anchor" ref={resultAnchor} tabIndex={-1}>
+          <AnalysisResult analysis={analysis} />
+        </div>
+      )}
+
+      <AnalysisHistory
+        onOpen={(result) => setCompletedAnalysis({ contextKey, result })}
+      />
 
       <footer className="disclaimer">
         MarketLens AI analyzes one supplied public filing at a time. It does not predict prices or

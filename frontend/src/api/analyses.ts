@@ -3,6 +3,8 @@ import type {
   AnalyzeAnnouncementRequest,
   AnalyzeUploadRequest,
   AnnouncementAnalysis,
+  AnalysisHistoryResponse,
+  StoredAnalysisResponse,
 } from "../types/market";
 
 export function analyzeAnnouncement(
@@ -28,4 +30,16 @@ export function analyzeUpload(request: AnalyzeUploadRequest): Promise<Announceme
     method: "POST",
     body,
   });
+}
+
+export function getAnalysisHistory(
+  limit = 12,
+  signal?: AbortSignal,
+): Promise<AnalysisHistoryResponse> {
+  const params = new URLSearchParams({ limit: String(limit) });
+  return apiRequest<AnalysisHistoryResponse>(`/analyses?${params.toString()}`, { signal });
+}
+
+export function getSavedAnalysis(analysisId: string): Promise<StoredAnalysisResponse> {
+  return apiRequest<StoredAnalysisResponse>(`/analyses/${encodeURIComponent(analysisId)}`);
 }

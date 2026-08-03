@@ -62,3 +62,11 @@ class AnalysisProviderError(MarketLensError):
 
 class AnalysisValidationError(MarketLensError):
     code = "analysis_validation_error"
+
+
+class AnalysisNotFoundError(MarketLensError):
+    code = "analysis_not_found"
+
+
+class AnalysisStorageError(MarketLensError):
+    code = "analysis_storage_error"

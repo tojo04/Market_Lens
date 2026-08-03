@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState, type FormEvent } from "react";
 
 import { analyzeAnnouncement, analyzeUpload } from "../api/analyses";
@@ -91,13 +91,18 @@ function AnalysisError({ error }: { error: Error }) {
 
 export function AnalysisActions({ company, announcement, onComplete }: AnalysisActionsProps) {
   const [file, setFile] = useState<File | null>(null);
+  const queryClient = useQueryClient();
+  const completeAnalysis = (analysis: AnnouncementAnalysis) => {
+    onComplete(analysis);
+    void queryClient.invalidateQueries({ queryKey: ["analysis-history"] });
+  };
   const automaticAnalysis = useMutation({
     mutationFn: analyzeAnnouncement,
-    onSuccess: onComplete,
+    onSuccess: completeAnalysis,
   });
   const uploadAnalysis = useMutation({
     mutationFn: analyzeUpload,
-    onSuccess: onComplete,
+    onSuccess: completeAnalysis,
   });
   const mode = automaticAnalysis.isPending
     ? "automatic"

@@ -4,7 +4,9 @@ from fastapi import Request
 from fastapi.responses import JSONResponse
 
 from app.core.exceptions import (
+    AnalysisNotFoundError,
     AnalysisProviderError,
+    AnalysisStorageError,
     AnalysisValidationError,
     AnnouncementNotFoundError,
     AttachmentUnavailableError,
@@ -20,7 +22,9 @@ from app.core.exceptions import (
 )
 
 STATUS_BY_ERROR = {
+    AnalysisNotFoundError: 404,
     AnalysisProviderError: 502,
+    AnalysisStorageError: 500,
     AnalysisValidationError: 502,
     CompanyNotFoundError: 404,
     AnnouncementNotFoundError: 404,

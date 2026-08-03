@@ -101,3 +101,25 @@ export interface AnalyzeUploadRequest {
   companyName?: string;
   securityCode?: string;
 }
+
+export interface AnalysisHistoryItem {
+  id: string;
+  company_name: string;
+  exchange: Exchange;
+  symbol: string | null;
+  security_code: string | null;
+  announcement_title: string;
+  announcement_category: AnnouncementCategory;
+  announcement_published_at: string | null;
+  created_at: string;
+}
+
+export interface AnalysisHistoryResponse {
+  items: AnalysisHistoryItem[];
+}
+
+export interface StoredAnalysisResponse {
+  id: string;
+  created_at: string;
+  analysis: AnnouncementAnalysis;
+}

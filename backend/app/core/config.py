@@ -44,6 +44,7 @@ class Settings(BaseSettings):
     analysis_timeout_seconds: float = Field(default=60.0, gt=0, le=180)
     analysis_max_tool_calls: int = Field(default=1, ge=0, le=3)
     analysis_max_document_chars: PositiveInt = Field(default=60_000, le=200_000)
+    database_url: str = Field(default="sqlite:///./marketlens.db", min_length=1)
 
 
 @lru_cache

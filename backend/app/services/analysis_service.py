@@ -1,9 +1,11 @@
 from datetime import date, datetime, time, timedelta, timezone
 
 from fastapi import UploadFile
+from starlette.concurrency import run_in_threadpool
 
 from app.agents.announcement_agent import AnnouncementAgent
 from app.core.exceptions import AttachmentUnavailableError, ScannedPdfUnsupportedError
+from app.repositories.analysis_repository import AnalysisRepository
 from app.schemas.analysis import (
     AnalysisInput,
     AnalyzeAnnouncementRequest,
@@ -25,11 +27,13 @@ class AnalysisService:
         announcement_service: AnnouncementService,
         document_service: DocumentService,
         agent: AnnouncementAgent,
+        analysis_repository: AnalysisRepository,
     ) -> None:
         self._company_service = company_service
         self._announcement_service = announcement_service
         self._document_service = document_service
         self._agent = agent
+        self._analysis_repository = analysis_repository
 
     async def analyze_announcement(
         self,
@@ -55,7 +59,7 @@ class AnalysisService:
             attachment_url=announcement.attachment_url,
             published_at=announcement.published_at,
         )
-        return await self._agent.analyze(
+        analysis = await self._agent.analyze(
             AnalysisInput(
                 source=source,
                 pages=extraction.pages,
@@ -63,6 +67,8 @@ class AnalysisService:
                 announcement_date=announcement.published_at.date(),
             )
         )
+        await run_in_threadpool(self._analysis_repository.save, analysis)
+        return analysis
 
     async def analyze_upload(
         self,
@@ -87,7 +93,7 @@ class AnalysisService:
             attachment_url=None,
             published_at=datetime.combine(announcement_date, time.min, tzinfo=INDIA_TIMEZONE),
         )
-        return await self._agent.analyze(
+        analysis = await self._agent.analyze(
             AnalysisInput(
                 source=source,
                 pages=extraction.pages,
@@ -95,6 +101,8 @@ class AnalysisService:
                 announcement_date=announcement_date,
             )
         )
+        await run_in_threadpool(self._analysis_repository.save, analysis)
+        return analysis
 
 
 def _require_text_extraction(extraction: ExtractionResult) -> None:
