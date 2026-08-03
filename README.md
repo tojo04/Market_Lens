@@ -2,11 +2,13 @@
 
 MarketLens AI is a focused educational application for explaining official Indian stock-market corporate announcements. The MVP will use a React frontend, a FastAPI backend, deterministic data services, and one bounded analysis agent.
 
-The project currently implements through **Phase 7**: normalized provider contracts,
+The project currently implements through **Phase 8**: normalized provider contracts,
 local company resolution, bounded official BSE announcement retrieval, secure PDF
 download/upload and extraction, deterministic nearby price-reaction calculation,
 and one structured announcement-analysis agent exposed through complete automatic
-and manual-upload API workflows. Persistence is intentionally not present yet.
+and manual-upload API workflows. The responsive frontend now presents the complete
+search, selection, analysis, source-attribution, and PDF-fallback experience.
+Persistence is intentionally not present yet.
 
 ## Prerequisites
 
@@ -48,6 +50,10 @@ npm run dev
 ```
 
 Open `http://localhost:5173`.
+
+Search for a supported company, explicitly select one recent announcement, and
+choose **Analyze announcement**. If exchange retrieval is unavailable, expand
+**Upload official announcement PDF instead** and provide the filing metadata.
 
 ## Checks
 

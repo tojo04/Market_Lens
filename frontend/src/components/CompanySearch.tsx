@@ -23,7 +23,8 @@ export function CompanySearch({ selectedCompany, onSelect }: CompanySearchProps)
   return (
     <section className="panel" aria-labelledby="company-search-title">
       <div className="step-label">Step 1</div>
-      <h2 id="company-search-title">Choose a listed company</h2>
+      <h2 id="company-search-title">Find a listed company</h2>
+      <p className="muted">Search the small supported-company directory to begin.</p>
       <label htmlFor="company-query">Company name, BSE code, or NSE symbol</label>
       <input
         id="company-query"
@@ -34,8 +35,15 @@ export function CompanySearch({ selectedCompany, onSelect }: CompanySearchProps)
         autoComplete="off"
       />
 
-      {searchQuery.isFetching && <p className="muted" role="status">Searching supported companies…</p>}
-      {searchQuery.isError && <p className="error" role="alert">Company search is unavailable.</p>}
+      {searchQuery.isFetching && (
+        <p className="inline-status muted" role="status">
+          <span className="spinner spinner-small" aria-hidden="true" />
+          Searching supported companies…
+        </p>
+      )}
+      {searchQuery.isError && (
+        <p className="error" role="alert">Company search is temporarily unavailable.</p>
+      )}
       {searchQuery.data?.items.length === 0 && <p className="muted">No supported company matched.</p>}
 
       {searchQuery.data && searchQuery.data.items.length > 0 && (
@@ -69,4 +77,3 @@ export function CompanySearch({ selectedCompany, onSelect }: CompanySearchProps)
     </section>
   );
 }
-

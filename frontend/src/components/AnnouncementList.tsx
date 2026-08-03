@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
+import { ApiError } from "../api/client";
 import { getRecentAnnouncements } from "../api/announcements";
 import type { AnnouncementSummary, CompanyMatch } from "../types/market";
 
@@ -19,18 +20,28 @@ export function AnnouncementList({
     queryFn: ({ signal }) => getRecentAnnouncements(company.company_id, signal),
     retry: 1,
   });
+  const retrievalError = announcementsQuery.error;
+  const errorMessage =
+    retrievalError instanceof ApiError && retrievalError.code === "provider_rate_limited"
+      ? "BSE is rate-limiting requests. Try again later or use the PDF fallback below."
+      : "BSE retrieval is temporarily unavailable. Use the official PDF fallback below.";
 
   return (
     <section className="panel" aria-labelledby="announcement-title">
       <div className="step-label">Step 2</div>
-      <h2 id="announcement-title">Recent BSE announcements</h2>
-      <p className="muted">Official filings for {company.company_name}</p>
+      <h2 id="announcement-title">Choose a recent announcement</h2>
+      <p className="muted">Official BSE filings for {company.company_name}</p>
 
-      {announcementsQuery.isPending && <p role="status">Finding announcements…</p>}
+      {announcementsQuery.isPending && (
+        <p className="inline-status" role="status">
+          <span className="spinner spinner-small" aria-hidden="true" />
+          Finding announcements…
+        </p>
+      )}
       {announcementsQuery.isError && (
         <div className="fallback" role="alert">
           <strong>Automatic retrieval is unavailable.</strong>
-          <span>You can continue with an official NSE/BSE PDF using the fallback below.</span>
+          <span>{errorMessage}</span>
         </div>
       )}
       {announcementsQuery.data?.items.length === 0 && (
@@ -57,7 +68,15 @@ export function AnnouncementList({
                     }).format(new Date(announcement.published_at))}
                   </small>
                   <small>
-                    {announcement.attachment_url ? "PDF attachment available" : "No PDF attachment"}
+                    <span
+                      className={
+                        announcement.attachment_url
+                          ? "attachment-status"
+                          : "attachment-status missing"
+                      }
+                    >
+                      {announcement.attachment_url ? "PDF available" : "No PDF attachment"}
+                    </span>
                   </small>
                 </button>
               </li>
