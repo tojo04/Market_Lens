@@ -2,7 +2,7 @@
 
 MarketLens AI is a focused educational application for explaining official Indian stock-market corporate announcements. The MVP will use a React frontend, a FastAPI backend, deterministic data services, and one bounded analysis agent.
 
-This repository currently implements **Phase 0 only**: the frontend/backend scaffold and development tooling. Company resolution, exchange retrieval, PDF processing, market data, model calls, and persistence are intentionally not present yet.
+The project currently implements through **Phase 5**: normalized provider contracts, local company resolution, bounded official BSE announcement retrieval, secure PDF download/upload and extraction, and deterministic nearby price-reaction calculation. OpenAI analysis and persistence are intentionally not present yet.
 
 ## Prerequisites
 
@@ -66,7 +66,15 @@ npm run build
 
 ## Current API
 
-`GET /api/health` returns a typed response:
+Available endpoints:
+
+- `GET /api/health`
+- `GET /api/companies/search?q=infosys`
+- `GET /api/companies/{company_id}/announcements`
+- `POST /api/companies/{company_id}/announcements/{announcement_id}/extract`
+- `POST /api/documents/extract-upload`
+
+The health endpoint returns:
 
 ```json
 {
@@ -79,5 +87,12 @@ Every backend response includes an `X-Request-ID` header. Browser access is rest
 
 ## Scope and safety
 
-MarketLens AI will explain public information; it will not provide investment advice, price forecasts, or trade recommendations. External retrieval and AI analysis are deliberately deferred to later build phases so their provider, security, and test boundaries can be implemented explicitly.
+MarketLens AI explains public information; it does not provide investment advice, price forecasts, or trade recommendations. Remote attachment URLs are resolved server-side from selected announcements, validated against SSRF-sensitive destinations and redirects, streamed with size limits, checked for PDF content and signature, and deleted after extraction. Scanned PDFs return an explicit unsupported status because OCR is outside the MVP.
 
+The internal price-reaction tool uses a bounded event window and application arithmetic. It returns unavailable instead of guessing when a ticker or adjacent trading session cannot be verified. A price reaction is not presented as proof that an announcement caused a market move.
+
+## BSE provider deployment note
+
+The prototype announcement adapter uses BSE's official corporate-announcement JSON surface with bounded dates, limits, timeouts, a descriptive user agent, and no browser automation. BSE terms, allowed usage, rate limits, and endpoint behavior must be verified before any public deployment. Provider failures are surfaced explicitly and the interface retains a manual-upload fallback; the application never switches to an unofficial mirror.
+
+The yfinance adapter is a replaceable prototype and must also be reviewed for suitability, licensing, reliability, and symbol coverage before deployment. Automated tests never contact BSE or yfinance.
