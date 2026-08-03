@@ -2,13 +2,15 @@
 
 MarketLens AI is a focused educational application for explaining official Indian stock-market corporate announcements. The MVP will use a React frontend, a FastAPI backend, deterministic data services, and one bounded analysis agent.
 
-The project currently implements through **Phase 9**: normalized provider contracts,
+The project currently implements through **Phase 10**: normalized provider contracts,
 local company resolution, bounded official BSE announcement retrieval, secure PDF
 download/upload and extraction, deterministic nearby price-reaction calculation,
 and one structured announcement-analysis agent exposed through complete automatic
 and manual-upload API workflows. The responsive frontend presents the complete
 search, selection, analysis, source-attribution, and PDF-fallback experience, and
 validated results are saved to a small local SQLite history for later reopening.
+An offline eight-category evaluation harness measures deterministic safety,
+grounding, attribution, and arithmetic invariants without paid or live API calls.
 
 ## Prerequisites
 
@@ -74,6 +76,29 @@ npm run lint
 npm run typecheck
 npm run build
 ```
+
+Offline evaluation:
+
+```powershell
+cd backend
+python -m evaluation.run_evaluation
+```
+
+## Evaluation summary
+
+The recorded synthetic evaluation set covers all eight supported announcement
+categories. The current baseline passes **8/8 cases and 96/96 deterministic
+checks** covering schema validity, disclaimer enforcement, recommendation
+language, price arithmetic, fact citations, numeric grounding, duplicate and
+empty sections, and reviewed source metadata. The blank human-review template is
+at `backend/evaluation/human_review_template.csv`.
+
+This is a harness verification result, not evidence that model output is always
+factually correct on real filings. Real evaluation still requires locally obtained
+official documents and human review. Known failure modes include scanned PDFs,
+complex table extraction, long-document truncation, provider schema changes,
+missing market prices, ambiguous unsupported companies, and plausible but
+unsupported model interpretations that deterministic checks cannot detect.
 
 ## Current API
 

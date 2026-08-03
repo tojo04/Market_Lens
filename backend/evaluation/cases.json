@@ -1,0 +1,426 @@
+[
+  {
+    "case_id": "financial_results_01",
+    "expected_category": "financial_results",
+    "expected_company_name": "Alpha Industries Limited",
+    "expected_announcement_date": "2026-08-03",
+    "expected_exchange": "BSE",
+    "expected_announcement_id": "eval-financial-01",
+    "source_pages": [
+      {
+        "page_number": 1,
+        "text": "On 3 August 2026, Alpha Industries Limited reported quarterly revenue of ₹1,250 crore. Previous close was ₹100.00 on 31 July 2026 and next close was ₹102.00 on 4 August 2026."
+      }
+    ],
+    "analysis": {
+      "announcement_category": "financial_results",
+      "title": "Quarterly financial results",
+      "summary": "Alpha Industries Limited reported quarterly revenue of ₹1,250 crore.",
+      "important_facts": [
+        {
+          "label": "Quarterly revenue",
+          "value": "₹1,250 crore",
+          "source_excerpt": "Alpha Industries Limited reported quarterly revenue of ₹1,250 crore.",
+          "page_number": 1
+        }
+      ],
+      "why_it_matters": ["The filing provides a current measure of reported operating scale."],
+      "positive_signals": ["The company disclosed a positive revenue figure."],
+      "risks": ["A single quarter does not establish a durable performance trend."],
+      "price_reaction": {
+        "previous_trading_date": "2026-07-31",
+        "previous_close": 100.0,
+        "next_trading_date": "2026-08-04",
+        "next_close": 102.0,
+        "percentage_change": 2.0,
+        "status": "available",
+        "note": "Nearby price reaction only; causation is not established."
+      },
+      "confidence": "high",
+      "limitations": ["Only the supplied fixture was assessed."],
+      "source": {
+        "provider": "evaluation_fixture",
+        "exchange": "BSE",
+        "company_name": "Alpha Industries Limited",
+        "symbol": "ALPHA",
+        "security_code": "500001",
+        "announcement_id": "eval-financial-01",
+        "announcement_url": null,
+        "attachment_url": null,
+        "published_at": "2026-08-03T10:00:00+05:30"
+      },
+      "disclaimer": "This is an educational explanation of public information, not investment advice."
+    }
+  },
+  {
+    "case_id": "dividend_01",
+    "expected_category": "dividend",
+    "expected_company_name": "Beta Consumer Limited",
+    "expected_announcement_date": "2026-08-04",
+    "expected_exchange": "BSE",
+    "expected_announcement_id": "eval-dividend-01",
+    "source_pages": [
+      {
+        "page_number": 1,
+        "text": "On 4 August 2026, the board of Beta Consumer Limited recommended a final dividend of ₹8 per equity share, subject to shareholder approval."
+      }
+    ],
+    "analysis": {
+      "announcement_category": "dividend",
+      "title": "Final dividend announcement",
+      "summary": "Beta Consumer Limited announced a proposed final dividend of ₹8 per equity share.",
+      "important_facts": [
+        {
+          "label": "Dividend",
+          "value": "₹8 per equity share",
+          "source_excerpt": "recommended a final dividend of ₹8 per equity share",
+          "page_number": 1
+        }
+      ],
+      "why_it_matters": ["The proposal describes a potential cash distribution to shareholders."],
+      "positive_signals": ["The board proposed returning cash to shareholders."],
+      "risks": ["The dividend remains subject to shareholder approval."],
+      "price_reaction": {
+        "previous_trading_date": null,
+        "previous_close": null,
+        "next_trading_date": null,
+        "next_close": null,
+        "percentage_change": null,
+        "status": "unavailable",
+        "note": "Recorded market data was intentionally omitted from this fixture."
+      },
+      "confidence": "high",
+      "limitations": ["Only the supplied fixture was assessed."],
+      "source": {
+        "provider": "evaluation_fixture",
+        "exchange": "BSE",
+        "company_name": "Beta Consumer Limited",
+        "symbol": "BETA",
+        "security_code": "500002",
+        "announcement_id": "eval-dividend-01",
+        "announcement_url": null,
+        "attachment_url": null,
+        "published_at": "2026-08-04T11:00:00+05:30"
+      },
+      "disclaimer": "This is an educational explanation of public information, not investment advice."
+    }
+  },
+  {
+    "case_id": "order_contract_01",
+    "expected_category": "order_or_contract",
+    "expected_company_name": "Gamma Engineering Limited",
+    "expected_announcement_date": "2026-08-05",
+    "expected_exchange": "BSE",
+    "expected_announcement_id": "eval-order-01",
+    "source_pages": [
+      {
+        "page_number": 1,
+        "text": "Gamma Engineering Limited received a domestic equipment order valued at ₹450 crore on 5 August 2026, with execution planned over 18 months."
+      }
+    ],
+    "analysis": {
+      "announcement_category": "order_or_contract",
+      "title": "Domestic equipment order",
+      "summary": "Gamma Engineering Limited received an order valued at ₹450 crore for execution over 18 months.",
+      "important_facts": [
+        {
+          "label": "Order value and duration",
+          "value": "₹450 crore over 18 months",
+          "source_excerpt": "order valued at ₹450 crore on 5 August 2026, with execution planned over 18 months",
+          "page_number": 1
+        }
+      ],
+      "why_it_matters": ["The order may contribute to the company’s executable business pipeline."],
+      "positive_signals": ["The filing identifies a defined contract value and execution period."],
+      "risks": ["Execution timing and margin realization are not verified by the announcement."],
+      "price_reaction": {
+        "previous_trading_date": null,
+        "previous_close": null,
+        "next_trading_date": null,
+        "next_close": null,
+        "percentage_change": null,
+        "status": "unavailable",
+        "note": "Recorded market data was intentionally omitted from this fixture."
+      },
+      "confidence": "high",
+      "limitations": ["Only the supplied fixture was assessed."],
+      "source": {
+        "provider": "evaluation_fixture",
+        "exchange": "BSE",
+        "company_name": "Gamma Engineering Limited",
+        "symbol": "GAMMA",
+        "security_code": "500003",
+        "announcement_id": "eval-order-01",
+        "announcement_url": null,
+        "attachment_url": null,
+        "published_at": "2026-08-05T09:30:00+05:30"
+      },
+      "disclaimer": "This is an educational explanation of public information, not investment advice."
+    }
+  },
+  {
+    "case_id": "acquisition_01",
+    "expected_category": "acquisition_or_investment",
+    "expected_company_name": "Delta Digital Limited",
+    "expected_announcement_date": "2026-08-06",
+    "expected_exchange": "BSE",
+    "expected_announcement_id": "eval-acquisition-01",
+    "source_pages": [
+      {
+        "page_number": 1,
+        "text": "On 6 August 2026, Delta Digital Limited approved the acquisition of a 51% stake in Nimbus Analytics Private Limited, subject to customary conditions."
+      }
+    ],
+    "analysis": {
+      "announcement_category": "acquisition_or_investment",
+      "title": "Majority-stake acquisition",
+      "summary": "Delta Digital Limited approved an acquisition of a 51% stake in Nimbus Analytics Private Limited.",
+      "important_facts": [
+        {
+          "label": "Proposed stake",
+          "value": "51%",
+          "source_excerpt": "acquisition of a 51% stake in Nimbus Analytics Private Limited",
+          "page_number": 1
+        }
+      ],
+      "why_it_matters": ["A majority stake could give the company control over the acquired business."],
+      "positive_signals": ["The proposal identifies the target and intended ownership level."],
+      "risks": ["Completion remains subject to customary conditions."],
+      "price_reaction": {
+        "previous_trading_date": null,
+        "previous_close": null,
+        "next_trading_date": null,
+        "next_close": null,
+        "percentage_change": null,
+        "status": "unavailable",
+        "note": "Recorded market data was intentionally omitted from this fixture."
+      },
+      "confidence": "high",
+      "limitations": ["Only the supplied fixture was assessed."],
+      "source": {
+        "provider": "evaluation_fixture",
+        "exchange": "BSE",
+        "company_name": "Delta Digital Limited",
+        "symbol": "DELTA",
+        "security_code": "500004",
+        "announcement_id": "eval-acquisition-01",
+        "announcement_url": null,
+        "attachment_url": null,
+        "published_at": "2026-08-06T14:00:00+05:30"
+      },
+      "disclaimer": "This is an educational explanation of public information, not investment advice."
+    }
+  },
+  {
+    "case_id": "management_change_01",
+    "expected_category": "management_change",
+    "expected_company_name": "Epsilon Services Limited",
+    "expected_announcement_date": "2026-08-07",
+    "expected_exchange": "BSE",
+    "expected_announcement_id": "eval-management-01",
+    "source_pages": [
+      {
+        "page_number": 1,
+        "text": "Epsilon Services Limited appointed Ms. Kavya Rao as Chief Financial Officer with effect from 1 September 2026. The announcement was dated 7 August 2026."
+      }
+    ],
+    "analysis": {
+      "announcement_category": "management_change",
+      "title": "Chief Financial Officer appointment",
+      "summary": "Epsilon Services Limited appointed Ms. Kavya Rao as Chief Financial Officer from 1 September 2026.",
+      "important_facts": [
+        {
+          "label": "Effective date",
+          "value": "1 September 2026",
+          "source_excerpt": "appointed Ms. Kavya Rao as Chief Financial Officer with effect from 1 September 2026",
+          "page_number": 1
+        }
+      ],
+      "why_it_matters": ["The appointment changes responsibility for the company’s finance function."],
+      "positive_signals": ["The filing names the appointee and effective date clearly."],
+      "risks": ["The fixture does not provide evidence about transition execution."],
+      "price_reaction": {
+        "previous_trading_date": null,
+        "previous_close": null,
+        "next_trading_date": null,
+        "next_close": null,
+        "percentage_change": null,
+        "status": "unavailable",
+        "note": "Recorded market data was intentionally omitted from this fixture."
+      },
+      "confidence": "high",
+      "limitations": ["Only the supplied fixture was assessed."],
+      "source": {
+        "provider": "evaluation_fixture",
+        "exchange": "BSE",
+        "company_name": "Epsilon Services Limited",
+        "symbol": "EPSILON",
+        "security_code": "500005",
+        "announcement_id": "eval-management-01",
+        "announcement_url": null,
+        "attachment_url": null,
+        "published_at": "2026-08-07T16:00:00+05:30"
+      },
+      "disclaimer": "This is an educational explanation of public information, not investment advice."
+    }
+  },
+  {
+    "case_id": "fundraising_01",
+    "expected_category": "fundraising",
+    "expected_company_name": "Zeta Renewables Limited",
+    "expected_announcement_date": "2026-08-10",
+    "expected_exchange": "BSE",
+    "expected_announcement_id": "eval-fundraising-01",
+    "source_pages": [
+      {
+        "page_number": 1,
+        "text": "On 10 August 2026, the board of Zeta Renewables Limited approved raising up to ₹600 crore through listed non-convertible debentures, subject to approvals."
+      }
+    ],
+    "analysis": {
+      "announcement_category": "fundraising",
+      "title": "Debt fundraising proposal",
+      "summary": "Zeta Renewables Limited approved a proposal to raise up to ₹600 crore through listed non-convertible debentures.",
+      "important_facts": [
+        {
+          "label": "Maximum fundraising",
+          "value": "Up to ₹600 crore",
+          "source_excerpt": "approved raising up to ₹600 crore through listed non-convertible debentures",
+          "page_number": 1
+        }
+      ],
+      "why_it_matters": ["The proposal could increase funding available to the company."],
+      "positive_signals": ["The board defined a maximum amount and proposed instrument."],
+      "risks": ["The fundraising is subject to approvals and may increase debt obligations."],
+      "price_reaction": {
+        "previous_trading_date": null,
+        "previous_close": null,
+        "next_trading_date": null,
+        "next_close": null,
+        "percentage_change": null,
+        "status": "unavailable",
+        "note": "Recorded market data was intentionally omitted from this fixture."
+      },
+      "confidence": "high",
+      "limitations": ["Only the supplied fixture was assessed."],
+      "source": {
+        "provider": "evaluation_fixture",
+        "exchange": "BSE",
+        "company_name": "Zeta Renewables Limited",
+        "symbol": "ZETA",
+        "security_code": "500006",
+        "announcement_id": "eval-fundraising-01",
+        "announcement_url": null,
+        "attachment_url": null,
+        "published_at": "2026-08-10T12:00:00+05:30"
+      },
+      "disclaimer": "This is an educational explanation of public information, not investment advice."
+    }
+  },
+  {
+    "case_id": "corporate_action_01",
+    "expected_category": "corporate_action",
+    "expected_company_name": "Eta Textiles Limited",
+    "expected_announcement_date": "2026-08-11",
+    "expected_exchange": "BSE",
+    "expected_announcement_id": "eval-corporate-action-01",
+    "source_pages": [
+      {
+        "page_number": 1,
+        "text": "Eta Textiles Limited approved a 1:1 bonus issue on 11 August 2026, meaning one bonus equity share for every one existing equity share, subject to approval."
+      }
+    ],
+    "analysis": {
+      "announcement_category": "corporate_action",
+      "title": "Bonus issue proposal",
+      "summary": "Eta Textiles Limited approved a proposed 1:1 bonus issue, subject to approval.",
+      "important_facts": [
+        {
+          "label": "Bonus ratio",
+          "value": "1:1",
+          "source_excerpt": "approved a 1:1 bonus issue on 11 August 2026",
+          "page_number": 1
+        }
+      ],
+      "why_it_matters": ["The proposal would change the number of outstanding equity shares."],
+      "positive_signals": ["The company disclosed the proposed bonus ratio clearly."],
+      "risks": ["The action remains subject to approval and does not itself create operating value."],
+      "price_reaction": {
+        "previous_trading_date": null,
+        "previous_close": null,
+        "next_trading_date": null,
+        "next_close": null,
+        "percentage_change": null,
+        "status": "unavailable",
+        "note": "Recorded market data was intentionally omitted from this fixture."
+      },
+      "confidence": "high",
+      "limitations": ["Only the supplied fixture was assessed."],
+      "source": {
+        "provider": "evaluation_fixture",
+        "exchange": "BSE",
+        "company_name": "Eta Textiles Limited",
+        "symbol": "ETA",
+        "security_code": "500007",
+        "announcement_id": "eval-corporate-action-01",
+        "announcement_url": null,
+        "attachment_url": null,
+        "published_at": "2026-08-11T13:00:00+05:30"
+      },
+      "disclaimer": "This is an educational explanation of public information, not investment advice."
+    }
+  },
+  {
+    "case_id": "other_01",
+    "expected_category": "other",
+    "expected_company_name": "Theta Logistics Limited",
+    "expected_announcement_date": "2026-08-14",
+    "expected_exchange": "BSE",
+    "expected_announcement_id": "eval-other-01",
+    "source_pages": [
+      {
+        "page_number": 1,
+        "text": "Theta Logistics Limited scheduled an investor conference call for 14 August 2026 to discuss general business updates. No financial guidance was included."
+      }
+    ],
+    "analysis": {
+      "announcement_category": "other",
+      "title": "Investor conference call notice",
+      "summary": "Theta Logistics Limited scheduled an investor conference call for 14 August 2026 without providing financial guidance.",
+      "important_facts": [
+        {
+          "label": "Conference call date",
+          "value": "14 August 2026",
+          "source_excerpt": "scheduled an investor conference call for 14 August 2026",
+          "page_number": 1
+        }
+      ],
+      "why_it_matters": ["The notice gives stakeholders a scheduled company communication event."],
+      "positive_signals": ["The company provided a clear date and purpose for the call."],
+      "risks": ["The notice contains no financial guidance or substantive operating update."],
+      "price_reaction": {
+        "previous_trading_date": null,
+        "previous_close": null,
+        "next_trading_date": null,
+        "next_close": null,
+        "percentage_change": null,
+        "status": "unavailable",
+        "note": "Recorded market data was intentionally omitted from this fixture."
+      },
+      "confidence": "high",
+      "limitations": ["Only the supplied fixture was assessed."],
+      "source": {
+        "provider": "evaluation_fixture",
+        "exchange": "BSE",
+        "company_name": "Theta Logistics Limited",
+        "symbol": "THETA",
+        "security_code": "500008",
+        "announcement_id": "eval-other-01",
+        "announcement_url": null,
+        "attachment_url": null,
+        "published_at": "2026-08-14T15:00:00+05:30"
+      },
+      "disclaimer": "This is an educational explanation of public information, not investment advice."
+    }
+  }
+]
